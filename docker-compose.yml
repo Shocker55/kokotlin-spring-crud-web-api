@@ -7,8 +7,11 @@ services:
   sample-pg:
     image: postgres:14-bullseye
     container_name: sample-pg
+    # Docker上に構築したPostgreSQLデータベースへの接続が上手く行かず
+    # 原因を調べたところ接続側(mac)にもPostgreSQLが動いておりポートが同じ(5432)で干渉していた
+    # "接続からの接続ポート:DockerのPostgreSQLポート"なので左のポートを変更
     ports:
-      - 5432:5432
+      - 5433:5432
     environment:
       POSTGRES_USER: sample-user
       POSTGRES_PASSWORD: sample-pass
